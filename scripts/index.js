@@ -10,13 +10,31 @@ let times = {
         tempoInicialVolta: 0
     },
     seteCap: {
-        nome: "Sete Capitães",
+        nome: "7 Capitães",
         voltas: [],
         nVoltas: 0,
         tempoInicialVolta: 0
     },
-    outro: {
-        nome: "Outro time",
+    solares: {
+        nome: "Solares",
+        voltas: [],
+        nVoltas: 0,
+        tempoInicialVolta: 0
+    },
+    zenite: {
+        nome: "Zenite",
+        voltas: [],
+        nVoltas: 0,
+        tempoInicialVolta: 0
+    },
+    solaris: {
+        nome: "Solaris",
+        voltas: [],
+        nVoltas: 0,
+        tempoInicialVolta: 0
+    },
+    arari: {
+        nome: "Araribóia",
         voltas: [],
         nVoltas: 0,
         tempoInicialVolta: 0
