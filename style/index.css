@@ -1,0 +1,46 @@
+.bottom > button {
+    font-size: x-large;
+}
+ /* list */
+#list {
+    border: 1px solid black;
+}
+
+.time {
+    font-size: large;
+}
+
+.time:hover {
+    cursor: pointer;
+}
+
+.time__tempo {
+    font-size: x-large;
+}
+
+.time__voltas {
+    font-size: x-large;
+}
+
+.time__bottom > button {
+    font-size: x-large;
+
+}
+/* --------------------- */
+
+/* posicoes */
+#posicoes {
+    border: 1px solid black;
+    font-size: x-large;
+    background-color: white;
+
+}
+/* -------------------- */
+
+/* tempos */
+#tempos {
+    border: 1px solid black;
+    font-size: x-large;
+
+}
+/* ------------------------- */
