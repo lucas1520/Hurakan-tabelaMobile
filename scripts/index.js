@@ -55,7 +55,7 @@ Object.entries(times).forEach((time) => {
             <hr class="separacao">
             <span class="time__bottom">
                 <p id=volta_${time[0]} class="time__voltas">Voltas: ${nVoltas}</p>
-                <button onclick="event.stopPropagation(); alert('foi')">-</button>
+                <!-- <button onclick="event.stopPropagation(); alert('foi')">-</button> -->
             </span>
         </div>
     `

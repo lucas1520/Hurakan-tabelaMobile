@@ -3,7 +3,7 @@
 }
  /* list */
 #list {
-    border: 1px solid black;
+    /* border: 1px solid black; */
 }
 
 .time {
@@ -31,7 +31,7 @@
 /* posicoes */
 #posicoes {
     border: 1px solid black;
-    font-size: x-large;
+    font-size: xx-large;
     background-color: white;
 
 }
@@ -44,3 +44,10 @@
 
 }
 /* ------------------------- */
+
+/* superior button*/
+.superior > button {
+    font-size: large;
+    padding: 1.3vh;
+}
+/* ----------------------------------- */
