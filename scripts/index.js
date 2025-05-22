@@ -1,45 +1,51 @@
 let tempoInicio;
 let intervalo;
 let comecou = false;
+let times;
 
-let times = {
-    hurakan: {
-        nome: "Hurakan",
-        voltas: [],
-        nVoltas: 0,
-        tempoInicialVolta: 0
-    },
-    seteCap: {
-        nome: "7 Capitães",
-        voltas: [],
-        nVoltas: 0,
-        tempoInicialVolta: 0
-    },
-    solares: {
-        nome: "Solares",
-        voltas: [],
-        nVoltas: 0,
-        tempoInicialVolta: 0
-    },
-    zenite: {
-        nome: "Zenite",
-        voltas: [],
-        nVoltas: 0,
-        tempoInicialVolta: 0
-    },
-    solaris: {
-        nome: "Solaris",
-        voltas: [],
-        nVoltas: 0,
-        tempoInicialVolta: 0
-    },
-    arari: {
-        nome: "Araribóia",
-        voltas: [],
-        nVoltas: 0,
-        tempoInicialVolta: 0
+let salvo = localStorage.getItem("times");
+if (salvo == "") {
+    times = {
+        hurakan: {
+            nome: "Hurakan",
+            voltas: [],
+            nVoltas: 0,
+            tempoInicialVolta: 0
+        },
+        seteCap: {
+            nome: "7 Capitães",
+            voltas: [],
+            nVoltas: 0,
+            tempoInicialVolta: 0
+        },
+        solares: {
+            nome: "Solares",
+            voltas: [],
+            nVoltas: 0,
+            tempoInicialVolta: 0
+        },
+        zenite: {
+            nome: "Zenite",
+            voltas: [],
+            nVoltas: 0,
+            tempoInicialVolta: 0
+        },
+        solaris: {
+            nome: "Solaris",
+            voltas: [],
+            nVoltas: 0,
+            tempoInicialVolta: 0
+        },
+        arari: {
+            nome: "Araribóia",
+            voltas: [],
+            nVoltas: 0,
+            tempoInicialVolta: 0
+        }
     }
-}
+} else times = JSON.parse(localStorage.getItem("times"));
+
+console.log(times);
 
 Object.entries(times).forEach((time) => {
     const container = document.createElement("div");
@@ -77,19 +83,21 @@ function adicionarVolta(nomeId) {
     voltas = voltas.toString();
     document.getElementById(`volta_${nomeId}`).textContent = `Voltas: ${voltas.padStart(2, "0")}`;
 
-    
+
     console.log(Date.now() - times[nomeId].tempoInicialVolta);
     times[nomeId].voltas.push(Date.now() - times[nomeId].tempoInicialVolta);
 
     times[nomeId].tempoInicialVolta = Date.now();
     console.log(atualizaPosicoes(times));
+    localStorage.setItem("times", JSON.stringify(times));
+    console.log(`Modificado: ${JSON.stringify(times)}`)
 }
 
 const atualizaPosicoes = (times) => {
-    
+
     let posicoes = [];
     Object.entries(times).forEach((elem) => {
-        posicoes.push({nome: elem[1].nome, nVoltas: elem[1].nVoltas});
+        posicoes.push({ nome: elem[1].nome, nVoltas: elem[1].nVoltas });
     })
 
     posicoes.sort((a, b) => b.nVoltas - a.nVoltas);
@@ -145,6 +153,7 @@ function pararCronometro() {
     clearInterval(intervalo);
     comecou = false;
     localStorage.setItem("tempoInicio", 0);
+    localStorage.setItem("times", "");
 }
 
 function converterTempo(mili, geral) {
