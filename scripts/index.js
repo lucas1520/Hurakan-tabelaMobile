@@ -126,6 +126,8 @@ function iniciarCronometro() {
     }
     let salvo = localStorage.getItem("tempoInicio");
 
+    console.log(salvo);
+
     tempoInicio = Number.parseInt(salvo) || Date.now();
     console.log(tempoInicio);
 
@@ -133,9 +135,12 @@ function iniciarCronometro() {
 
     console.log(converterTempo(tempoInicio, false));
 
-    Object.entries(times).forEach((elem) => {
-        elem[1].tempoInicialVolta = tempoInicio;
-    })
+    if (!Number.parseInt(salvo)) {
+        Object.entries(times).forEach((elem) => {
+            elem[1].tempoInicialVolta = tempoInicio;
+        })
+        // console.log("foi");
+    }
 
     intervalo = setInterval(() => {
         let tempoAgora = Date.now();
