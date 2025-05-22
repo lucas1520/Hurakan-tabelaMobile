@@ -69,6 +69,10 @@ function adicionarVolta(nomeId) {
         alert("Inicie o cronômetro antes!");
         return;
     }
+
+    let con = confirm(`Adicionar uma VOLTA no time ${times[nomeId].nome}?`);
+    if (!con) return;
+    console.log(con);
     let voltas = ++times[nomeId].nVoltas;
     voltas = voltas.toString();
     document.getElementById(`volta_${nomeId}`).textContent = `Voltas: ${voltas.padStart(2, "0")}`;
