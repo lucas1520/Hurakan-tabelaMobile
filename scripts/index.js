@@ -84,29 +84,30 @@ function adicionarVolta(nomeId) {
     times[nomeId].tempoInicialVolta = Date.now();
     console.log(atualizaPosicoes(times));
 }
+
 const atualizaPosicoes = (times) => {
     
     let posicoes = [];
     Object.entries(times).forEach((elem) => {
-        posicoes.push({nome: elem[1].nome, nVoltas: elem[1].nVoltas})
+        posicoes.push({nome: elem[1].nome, nVoltas: elem[1].nVoltas});
     })
 
-    posicoes.sort((a, b) => b.nVoltas - a.nVoltas)
+    posicoes.sort((a, b) => b.nVoltas - a.nVoltas);
     // return posicoes
 
-    let numero = 0
-    let voltasAnterior = -9999
-    document.getElementById("posicoes").innerHTML = ""
+    let numero = 0;
+    let voltasAnterior = -9999;
+    document.getElementById("posicoes").innerHTML = "";
     posicoes.forEach((elem) => {
         if (voltasAnterior != elem.nVoltas) {
-            numero++
+            numero++;
         }
         let timePos = document.createElement("p")
         timePos.innerHTML = `
             <p>${numero}. ${elem.nome}</p>
-        `
-        document.getElementById("posicoes").append(timePos)
-        voltasAnterior = elem.nVoltas
+        `;
+        document.getElementById("posicoes").append(timePos);
+        voltasAnterior = elem.nVoltas;
     })
 }
 
@@ -115,7 +116,13 @@ function iniciarCronometro() {
         alert("Cronômetro já começou!!");
         return;
     }
-    tempoInicio = Date.now();
+    let salvo = localStorage.getItem("tempoInicio");
+
+    tempoInicio = Number.parseInt(salvo) || Date.now();
+    console.log(tempoInicio);
+
+    localStorage.setItem("tempoInicio", tempoInicio);
+
     console.log(converterTempo(tempoInicio, false));
 
     Object.entries(times).forEach((elem) => {
@@ -137,6 +144,7 @@ function iniciarCronometro() {
 function pararCronometro() {
     clearInterval(intervalo);
     comecou = false;
+    localStorage.setItem("tempoInicio", 0);
 }
 
 function converterTempo(mili, geral) {
