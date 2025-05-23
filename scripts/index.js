@@ -4,7 +4,7 @@ let comecou = false;
 let times;
 
 let salvo = localStorage.getItem("times");
-if (salvo == "") {
+if (salvo == null) {
     times = {
         hurakan: {
             nome: "Hurakan",
@@ -43,9 +43,12 @@ if (salvo == "") {
             tempoInicialVolta: 0
         }
     }
-} else times = JSON.parse(localStorage.getItem("times"));
+    console.log(`Salvo == null`)
 
-console.log(times);
+} else {
+    times = JSON.parse(salvo);
+    iniciarCronometro();
+}
 
 Object.entries(times).forEach((time) => {
     const container = document.createElement("div");
@@ -126,22 +129,21 @@ function iniciarCronometro() {
     }
     let salvo = localStorage.getItem("tempoInicio");
 
-    console.log(salvo);
+    // tempoInicio = Number.parseInt(salvo) || Date.now();
 
-    tempoInicio = Number.parseInt(salvo) || Date.now();
-    console.log(tempoInicio);
-
-    localStorage.setItem("tempoInicio", tempoInicio);
-
-    console.log(converterTempo(tempoInicio, false));
-
-    if (!Number.parseInt(salvo)) {
+    
+    
+    if (salvo == null) {
+        tempoInicio = Date.now();
         Object.entries(times).forEach((elem) => {
             elem[1].tempoInicialVolta = tempoInicio;
         })
-        // console.log("foi");
+        localStorage.setItem("tempoInicio", tempoInicio);
+        console.log("foi");
+    } else {
+        tempoInicio = parseInt(salvo);   
     }
-
+    
     intervalo = setInterval(() => {
         let tempoAgora = Date.now();
         document.getElementById("tempoGeral").textContent = converterTempo(tempoAgora - tempoInicio, true);
@@ -151,14 +153,15 @@ function iniciarCronometro() {
             document.getElementById(`tempo_${elem[0]}`).textContent = converterTempo(tempoCadaTime, false);
         })
     }, 170)
+    localStorage.setItem("times", JSON.stringify(times))
     comecou = true;
 }
 
 function pararCronometro() {
     clearInterval(intervalo);
     comecou = false;
-    localStorage.setItem("tempoInicio", 0);
-    localStorage.setItem("times", "");
+    localStorage.removeItem("tempoInicio");
+    localStorage.removeItem("times");
 }
 
 function converterTempo(mili, geral) {
