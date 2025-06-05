@@ -51,6 +51,9 @@
 .time__bottom > button {
     width: 30%;
     border-radius: 5px;
+    padding: 1vh;
+    /* padding-left: 10%;
+    padding-right: 10%; */
 }
 
 #tempos {
@@ -72,7 +75,7 @@
 }
 
 #tempoVoltas {
-    /* display: none; */
+    display: none;
     position: fixed;
     width: 50%;
     background-color: blue;

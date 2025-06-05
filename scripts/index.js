@@ -63,8 +63,9 @@ Object.entries(times).forEach((time) => {
             </span>
             <hr class="separacao">
             <span class="time__bottom">
-                <p id=volta_${time[0]} class="time__voltas">Voltas: ${nVoltas}</p>
-                <button onclick="event.stopPropagation(); alert('foi')">-</button>
+                <p id=volta_${time[0]} class="time__voltas">${nVoltas}</p>
+                <button onclick="event.stopPropagation(); mostraTempos()"> Tempos </button>
+                ${/* <button onclick="event.stopPropagation(); alert('foi')">-</button> */''}
             </span>
         </div>
     `
@@ -186,5 +187,7 @@ function mostrarPosicoes() {
 }
 
 function mostraTempos() {
-    // let display = 
+    let displayIf = document.getElementById("tempoVoltas").style.display;
+    console.log(displayIf);
+    document.getElementById("tempoVoltas").style.display = displayIf == "none" || displayIf == "" ? "block" : "none";
 }
