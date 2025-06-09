@@ -131,8 +131,9 @@ function atualizaTempos(nomeId) {
     let cont = 1;
     times[nomeId].voltas.forEach((volta) => {
         let voltaELement = document.createElement("p");
+        let voltaConvertido = converterTempo(volta, 0)
         voltaELement.innerHTML = `
-            <p>${cont}.${volta}</p>
+            ${cont}| ${voltaConvertido}
         `;
         tabelaTempos.append(voltaELement);
         cont++;
