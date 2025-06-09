@@ -56,9 +56,18 @@
     padding-right: 10%; */
 }
 
-#tempos {
-    display: inline-flex;
+#tempoVoltas {
+    display: none;
     flex-direction: column;
+    align-items: center;
+    position: fixed;
+    padding: 2vh;
+}
+
+#tempoVoltas > button {
+    padding: 1.1vh;
+    width: 50%;
+    margin-bottom: 1vh;
 }
 
 #posicoes {
@@ -72,11 +81,4 @@
 
 .bottom {
     text-align: center;
-}
-
-#tempoVoltas {
-    display: none;
-    position: fixed;
-    width: 50%;
-    border: 1px solid black;
 }

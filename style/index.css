@@ -37,13 +37,16 @@
 }
 /* -------------------- */
 
-/* tempos */
-#tempos {
-    border: 1px solid black;
-    font-size: x-large;
+/* tempoVoltas */
 
+#tempoVoltas {
+    background-color: white;
+    font-size: x-large;
+    border: 1px solid black;
 }
-/* ------------------------- */
+
+
+/* --------------------------------- */
 
 /* superior button*/
 .superior > button {
