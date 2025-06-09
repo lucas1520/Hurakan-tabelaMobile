@@ -64,15 +64,15 @@ Object.entries(times).forEach((time) => {
             <hr class="separacao">
             <span class="time__bottom">
                 <p id=volta_${time[0]} class="time__voltas">${nVoltas}</p>
-                <button onclick="event.stopPropagation(); mostraTempos()"> Tempos </button>
+                <button onclick="event.stopPropagation(); mostraTempos('${time[0]}')"> Tempos </button>
                 ${/* <button onclick="event.stopPropagation(); alert('foi')">-</button> */''}
             </span>
         </div>
     `
-
     document.getElementById("list").append(container);
     console.log(time);
 })
+atualizaPosicoes(times)
 
 function adicionarVolta(nomeId) {
     if (!comecou) {
@@ -97,7 +97,7 @@ function adicionarVolta(nomeId) {
     console.log(`Modificado: ${JSON.stringify(times)}`)
 }
 
-const atualizaPosicoes = (times) => {
+function atualizaPosicoes(times){
 
     let posicoes = [];
     Object.entries(times).forEach((elem) => {
@@ -121,6 +121,23 @@ const atualizaPosicoes = (times) => {
         document.getElementById("posicoes").append(timePos);
         voltasAnterior = elem.nVoltas;
     })
+}
+
+function atualizaTempos(nomeId) {
+    let tabelaTempos = document.getElementById("tempoVoltas");
+    tabelaTempos.innerHTML = "";
+    tabelaTempos.innerHTML =`<button onclick="mostraTempos('${nomeId}')">X</button>`;
+
+    let cont = 1;
+    times[nomeId].voltas.forEach((volta) => {
+        let voltaELement = document.createElement("p");
+        voltaELement.innerHTML = `
+            <p>${cont}.${volta}</p>
+        `;
+        tabelaTempos.append(voltaELement);
+        cont++;
+    })
+
 }
 
 function iniciarCronometro() {
@@ -186,7 +203,9 @@ function mostrarPosicoes() {
     document.getElementById("posicoes").style.display = displayIf == "none" || displayIf == "" ? "block" : "none";
 }
 
-function mostraTempos() {
+function mostraTempos(time) {
+    atualizaTempos(time);
+
     let displayIf = document.getElementById("tempoVoltas").style.display;
     console.log(displayIf);
     document.getElementById("tempoVoltas").style.display = displayIf == "none" || displayIf == "" ? "block" : "none";
