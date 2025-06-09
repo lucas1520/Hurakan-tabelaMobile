@@ -176,6 +176,9 @@ function iniciarCronometro() {
 }
 
 function pararCronometro() {
+    let con = confirm("Deseja PARAR o Cronometro?");
+    if (!con) return;
+
     clearInterval(intervalo);
     comecou = false;
     localStorage.removeItem("tempoInicio");
