@@ -85,7 +85,7 @@ function adicionarVolta(nomeId) {
     console.log(con);
     let voltas = ++times[nomeId].nVoltas;
     voltas = voltas.toString();
-    document.getElementById(`volta_${nomeId}`).textContent = `Voltas: ${voltas.padStart(2, "0")}`;
+    document.getElementById(`volta_${nomeId}`).textContent = `${voltas.padStart(2, "0")}`;
 
 
     console.log(Date.now() - times[nomeId].tempoInicialVolta);
@@ -212,5 +212,5 @@ function mostraTempos(time) {
 
     let displayIf = document.getElementById("tempoVoltas").style.display;
     console.log(displayIf);
-    document.getElementById("tempoVoltas").style.display = displayIf == "none" || displayIf == "" ? "block" : "none";
+    document.getElementById("tempoVoltas").style.display = displayIf == "none" || displayIf == "" ? "flex" : "none";
 }
