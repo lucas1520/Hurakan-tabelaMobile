@@ -269,14 +269,27 @@ function exportar() {
     Object.entries(times).forEach((equipe) => {
         let titulo = document.createElement("h3");
         let numeroVoltas = document.createElement("span");
+        let menorVolta = document.createElement("p");
+        let maiorVolta = document.createElement("p");
 
         titulo.style = "display: inline-block; margin-bottom: 1.2vh";
         
         titulo.innerText = equipe[1].nome;
-        numeroVoltas.innerHTML = " | " + equipe[1].nVoltas + "<br>";
+        numeroVoltas.innerHTML = " | " + equipe[1].nVoltas;
+
+        menorVolta.innerText = converterTempo(equipe[1].voltaMenor, 0);
+        menorVolta.style = "background-color: green; display: inline-block;"
+        maiorVolta.innerText = converterTempo(equipe[1].voltaMaior, 0);
+        maiorVolta.style = "background-color: red; display: inline-block;"
 
         paginaExp.document.write(titulo.outerHTML);
         paginaExp.document.write(numeroVoltas.outerHTML);
+        paginaExp.document.write("<br>");
+        paginaExp.document.write(menorVolta.outerHTML);
+        paginaExp.document.write("<br>");
+        paginaExp.document.write(maiorVolta.outerHTML);
+        paginaExp.document.write("<br>");
+        paginaExp.document.write("<br>");
         
         let voltasSpan = document.createElement("p");
         let cont = 1;
