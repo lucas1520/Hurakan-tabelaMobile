@@ -10,36 +10,48 @@ if (salvo == null) {
             nome: "Hurakan",
             voltas: [],
             nVoltas: 0,
+            voltaMenor: 99999999999,
+            voltaMaior: -99999999999,
             tempoInicialVolta: 0
         },
         seteCap: {
             nome: "7 Capitães",
             voltas: [],
             nVoltas: 0,
+            voltaMenor: 99999999999,
+            voltaMaior: -99999999999,
             tempoInicialVolta: 0
         },
         solares: {
             nome: "Solares",
             voltas: [],
             nVoltas: 0,
+            voltaMenor: 99999999999,
+            voltaMaior: -99999999999,
             tempoInicialVolta: 0
         },
         zenite: {
             nome: "Zenite",
             voltas: [],
             nVoltas: 0,
+            voltaMenor: 99999999999,
+            voltaMaior: -99999999999,
             tempoInicialVolta: 0
         },
         solaris: {
             nome: "Solaris",
             voltas: [],
             nVoltas: 0,
+            voltaMenor: 99999999999,
+            voltaMaior: -99999999999,
             tempoInicialVolta: 0
         },
         arari: {
             nome: "Araribóia",
             voltas: [],
             nVoltas: 0,
+            voltaMenor: 99999999999,
+            voltaMaior: -99999999999,
             tempoInicialVolta: 0
         }
     }
@@ -82,14 +94,22 @@ function adicionarVolta(nomeId) {
 
     let con = confirm(`Adicionar uma VOLTA no time ${times[nomeId].nome}?`);
     if (!con) return;
-    console.log(con);
+
     let voltas = ++times[nomeId].nVoltas;
     voltas = voltas.toString();
     document.getElementById(`volta_${nomeId}`).textContent = `${voltas.padStart(2, "0")}`;
 
 
-    console.log(Date.now() - times[nomeId].tempoInicialVolta);
-    times[nomeId].voltas.push(Date.now() - times[nomeId].tempoInicialVolta);
+    let voltaAtual = Date.now() - times[nomeId].tempoInicialVolta;
+    console.log(voltaAtual);
+    times[nomeId].voltas.push(voltaAtual);
+    if (voltaAtual < times[nomeId].voltaMenor) {
+        times[nomeId].voltaMenor = voltaAtual;
+    }
+
+    if (voltaAtual > times[nomeId].voltaMaior) {
+        times[nomeId].voltaMaior = voltaAtual;
+    }
 
     times[nomeId].tempoInicialVolta = Date.now();
     console.log(atualizaPosicoes(times));
@@ -126,11 +146,23 @@ function atualizaPosicoes(times){
 function atualizaTempos(nomeId) {
     let tabelaTempos = document.getElementById("tempoVoltas");
     tabelaTempos.innerHTML = "";
+
     tabelaTempos.innerHTML =`<button onclick="mostraTempos('${nomeId}')">X</button>`;
+
     let pNome = document.createElement("p");
+    let pMenorVolta = document.createElement("p");
+    let pMaiorVolta = document.createElement("p");
     pNome.innerHTML = times[nomeId].nome;
-    pNome.className = "tempoVoltas__titulo"
+    pNome.className = "tempoVoltas__titulo";
+
+    pMenorVolta.innerText = converterTempo(times[nomeId].voltaMenor, 0);
+    pMenorVolta.style = "background-color: green;";
+    pMaiorVolta.innerText = converterTempo(times[nomeId].voltaMaior, 0);
+    pMaiorVolta.style = "background-color: red;";
+
     tabelaTempos.append(pNome);
+    tabelaTempos.append(pMenorVolta);
+    tabelaTempos.append(pMaiorVolta);
 
     let cont = 1;
     times[nomeId].voltas.forEach((volta) => {
@@ -212,6 +244,10 @@ function mostrarPosicoes() {
 }
 
 function mostraTempos(time) {
+    if (!comecou) {
+        alert("Inicie o cronômetro antes!");
+        return;
+    }
     atualizaTempos(time);
 
     let displayIf = document.getElementById("tempoVoltas").style.display;
