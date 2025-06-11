@@ -221,7 +221,37 @@ function mostraTempos(time) {
 
 function exportar() {
     let paginaExp = window.open("");
+
+    paginaExp.document.write(`
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+        <link rel="stylesheet" href="style/global.css">
+    `);
+
     
     
+    Object.entries(times).forEach((equipe) => {
+        let titulo = document.createElement("h3");
+        let numeroVoltas = document.createElement("span");
+
+        titulo.style = "display: inline-block; margin-bottom: 1.2vh";
+        
+        titulo.innerText = equipe[1].nome;
+        numeroVoltas.innerHTML = " | " + equipe[1].nVoltas + "<br>";
+
+        paginaExp.document.write(titulo.outerHTML);
+        paginaExp.document.write(numeroVoltas.outerHTML);
+        
+        let voltasSpan = document.createElement("p");
+        let cont = 1;
+        equipe[1].voltas.forEach((volta) => {
+            voltasSpan.innerText = cont + ". " + converterTempo(volta, 0);
+            paginaExp.document.write(voltasSpan.outerHTML);
+            cont++;
+        })
+
+    })
+
+    paginaExp.document.write(`<br> --------------------------------------------- `);
     paginaExp.document.write(`<pre>${JSON.stringify(times, null, 2)}</pre>`);
 }
