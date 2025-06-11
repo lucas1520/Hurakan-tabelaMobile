@@ -127,6 +127,10 @@ function atualizaTempos(nomeId) {
     let tabelaTempos = document.getElementById("tempoVoltas");
     tabelaTempos.innerHTML = "";
     tabelaTempos.innerHTML =`<button onclick="mostraTempos('${nomeId}')">X</button>`;
+    let pNome = document.createElement("p");
+    pNome.innerHTML = times[nomeId].nome;
+    pNome.className = "tempoVoltas__titulo"
+    tabelaTempos.append(pNome);
 
     let cont = 1;
     times[nomeId].voltas.forEach((volta) => {

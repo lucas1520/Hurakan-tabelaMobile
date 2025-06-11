@@ -33,7 +33,7 @@
     border: 1px solid black;
     font-size: xx-large;
     background-color: white;
-
+    box-shadow: 5px 5px 15px;
 }
 /* -------------------- */
 
@@ -43,6 +43,7 @@
     background-color: white;
     font-size: x-large;
     border: 1px solid black;
+    box-shadow: 5px 5px 15px;
 }
 
 
