@@ -220,6 +220,7 @@ function pararCronometro() {
     comecou = false;
     localStorage.removeItem("tempoInicio");
     localStorage.removeItem("times");
+    exportar();
 }
 
 function converterTempo(mili, geral) {
