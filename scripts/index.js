@@ -218,3 +218,10 @@ function mostraTempos(time) {
     console.log(displayIf);
     document.getElementById("tempoVoltas").style.display = displayIf == "none" || displayIf == "" ? "flex" : "none";
 }
+
+function exportar() {
+    let paginaExp = window.open("");
+    
+    
+    paginaExp.document.write(`<pre>${JSON.stringify(times, null, 2)}</pre>`);
+}
