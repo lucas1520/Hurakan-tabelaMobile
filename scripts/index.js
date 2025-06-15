@@ -10,48 +10,48 @@ if (salvo == null) {
             nome: "Hurakan",
             voltas: [],
             nVoltas: 0,
-            voltaMenor: 99999999999,
-            voltaMaior: -99999999999,
+            voltaMenor: Infinity,
+            voltaMaior: -Infinity,
             tempoInicialVolta: 0
         },
         seteCap: {
             nome: "7 Capitães",
             voltas: [],
             nVoltas: 0,
-            voltaMenor: 99999999999,
-            voltaMaior: -99999999999,
+            voltaMenor: Infinity,
+            voltaMaior: -Infinity,
             tempoInicialVolta: 0
         },
         solares: {
             nome: "Solares",
             voltas: [],
             nVoltas: 0,
-            voltaMenor: 99999999999,
-            voltaMaior: -99999999999,
+            voltaMenor: Infinity,
+            voltaMaior: -Infinity,
             tempoInicialVolta: 0
         },
         zenite: {
             nome: "Zenite",
             voltas: [],
             nVoltas: 0,
-            voltaMenor: 99999999999,
-            voltaMaior: -99999999999,
+            voltaMenor: Infinity,
+            voltaMaior: -Infinity,
             tempoInicialVolta: 0
         },
         solaris: {
             nome: "Solaris",
             voltas: [],
             nVoltas: 0,
-            voltaMenor: 99999999999,
-            voltaMaior: -99999999999,
+            voltaMenor: Infinity,
+            voltaMaior: -Infinity,
             tempoInicialVolta: 0
         },
         arari: {
             nome: "Araribóia",
             voltas: [],
             nVoltas: 0,
-            voltaMenor: 99999999999,
-            voltaMaior: -99999999999,
+            voltaMenor: Infinity,
+            voltaMaior: -Infinity,
             tempoInicialVolta: 0
         }
     }
@@ -155,9 +155,16 @@ function atualizaTempos(nomeId) {
     pNome.innerHTML = times[nomeId].nome;
     pNome.className = "tempoVoltas__titulo";
 
-    pMenorVolta.innerText = converterTempo(times[nomeId].voltaMenor, 0);
+    times[nomeId].voltaMenor == Infinity ? 
+        pMenorVolta.innerText = "--:--.---" :
+        pMenorVolta.innerText = converterTempo(times[nomeId].voltaMenor, 0);
+
     pMenorVolta.style = "background-color: green;";
-    pMaiorVolta.innerText = converterTempo(times[nomeId].voltaMaior, 0);
+
+    times[nomeId].voltaMaior == -Infinity ?
+        pMaiorVolta.innerText = "--:--.---" :
+        pMaiorVolta.innerText = converterTempo(times[nomeId].voltaMaior, 0);
+    
     pMaiorVolta.style = "background-color: red;";
 
     tabelaTempos.append(pNome);
@@ -184,10 +191,7 @@ function iniciarCronometro() {
     }
     let salvo = localStorage.getItem("tempoInicio");
 
-    // tempoInicio = Number.parseInt(salvo) || Date.now();
 
-    
-    
     if (salvo == null) {
         tempoInicio = Date.now();
         Object.entries(times).forEach((elem) => {
@@ -278,9 +282,16 @@ function exportar() {
         titulo.innerText = equipe[1].nome;
         numeroVoltas.innerHTML = " | " + equipe[1].nVoltas;
 
-        menorVolta.innerText = converterTempo(equipe[1].voltaMenor, 0);
+        equipe[1].voltaMenor == Infinity ? 
+            menorVolta.innerText = "--:--.---" :
+            menorVolta.innerText = converterTempo(equipe[1].voltaMenor, 0);
+
         menorVolta.style = "background-color: green; display: inline-block;"
-        maiorVolta.innerText = converterTempo(equipe[1].voltaMaior, 0);
+
+        equipe[1].voltaMaior == -Infinity ? 
+            maiorVolta.innerText = "--:--.---" :
+            maiorVolta.innerText = converterTempo(equipe[1].voltaMaior, 0);
+        
         maiorVolta.style = "background-color: red; display: inline-block;"
 
         paginaExp.document.write(titulo.outerHTML);
