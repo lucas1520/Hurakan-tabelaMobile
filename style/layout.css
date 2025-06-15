@@ -62,6 +62,8 @@
     align-items: center;
     position: fixed;
     padding: 2vh;
+    max-height: 70vh;
+
 }
 
 #tempoVoltas > button {
