@@ -12,6 +12,7 @@ if (salvo == null) {
             nVoltas: 0,
             voltaMenor: Infinity,
             voltaMaior: -Infinity,
+            mediaVoltas: 0,
             tempoInicialVolta: 0
         },
         seteCap: {
@@ -20,6 +21,7 @@ if (salvo == null) {
             nVoltas: 0,
             voltaMenor: Infinity,
             voltaMaior: -Infinity,
+            mediaVoltas: 0,
             tempoInicialVolta: 0
         },
         solares: {
@@ -28,6 +30,7 @@ if (salvo == null) {
             nVoltas: 0,
             voltaMenor: Infinity,
             voltaMaior: -Infinity,
+            mediaVoltas: 0,
             tempoInicialVolta: 0
         },
         zenite: {
@@ -36,6 +39,7 @@ if (salvo == null) {
             nVoltas: 0,
             voltaMenor: Infinity,
             voltaMaior: -Infinity,
+            mediaVoltas: 0,
             tempoInicialVolta: 0
         },
         solaris: {
@@ -44,6 +48,7 @@ if (salvo == null) {
             nVoltas: 0,
             voltaMenor: Infinity,
             voltaMaior: -Infinity,
+            mediaVoltas: 0,
             tempoInicialVolta: 0
         },
         arari: {
@@ -52,6 +57,7 @@ if (salvo == null) {
             nVoltas: 0,
             voltaMenor: Infinity,
             voltaMaior: -Infinity,
+            mediaVoltas: 0,
             tempoInicialVolta: 0
         }
     }
@@ -115,6 +121,19 @@ function adicionarVolta(nomeId) {
     console.log(atualizaPosicoes(times));
     localStorage.setItem("times", JSON.stringify(times));
     console.log(`Modificado: ${JSON.stringify(times)}`)
+
+    atualizarMedia(nomeId);
+}
+
+function atualizarMedia(nomeId) {
+    let somaTempo = 0;
+    times[nomeId].voltas.forEach((volta) => {
+        somaTempo += volta;
+    })
+    let media = somaTempo / times[nomeId].nVoltas;
+    times[nomeId].mediaVoltas = media;
+    console.log(`Media: ${converterTempo(media, 0)}`)
+
 }
 
 function atualizaPosicoes(times){
@@ -167,9 +186,14 @@ function atualizaTempos(nomeId) {
     
     pMaiorVolta.style = "background-color: red;";
 
+    let mediaP = document.createElement("p");
+    mediaP.innerText = `Média: ${converterTempo(times[nomeId].mediaVoltas, 0)}`;
+    mediaP.style = "margin-bottom: 1.5vh; margin-top: 1.5vh;"
+
     tabelaTempos.append(pNome);
     tabelaTempos.append(pMenorVolta);
     tabelaTempos.append(pMaiorVolta);
+    tabelaTempos.append(mediaP);
 
     let cont = 1;
     times[nomeId].voltas.forEach((volta) => {
@@ -280,7 +304,7 @@ function exportar() {
         titulo.style = "display: inline-block; margin-bottom: 1.2vh";
         
         titulo.innerText = equipe[1].nome;
-        numeroVoltas.innerHTML = " | " + equipe[1].nVoltas;
+        numeroVoltas.innerHTML = " | " + equipe[1].nVoltas + " | " + converterTempo(equipe[1].mediaVoltas, 0);
 
         equipe[1].voltaMenor == Infinity ? 
             menorVolta.innerText = "--:--.---" :
