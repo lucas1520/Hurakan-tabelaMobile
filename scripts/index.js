@@ -110,13 +110,24 @@ function adicionarVolta(nomeId) {
     console.log(voltaAtual);
     times[nomeId].voltas.push(voltaAtual);
     console.log(`Volta menor: ${times[nomeId].voltaMenor}`)
-    if (voltaAtual < times[nomeId].voltaMenor || times[nomeId].voltaMenor == null) {
-        times[nomeId].voltaMenor = voltaAtual;
-    }
 
-    if (voltaAtual > times[nomeId].voltaMaior) {
-        times[nomeId].voltaMaior = voltaAtual;
-    }
+
+    let menor = times[nomeId].voltas[0]; 
+    let maior = times[nomeId].voltas[0]; 
+    times[nomeId].voltas.forEach((volta)=> {
+        if (volta < menor) menor = volta;
+        if (volta > maior) maior = volta;
+    })
+    times[nomeId].voltaMenor = menor;
+    times[nomeId].voltaMaior = maior;
+
+    // if (voltaAtual < times[nomeId].voltaMenor || times[nomeId].voltaMenor == null) {
+    //     times[nomeId].voltaMenor = voltaAtual;
+    // }
+
+    // if (voltaAtual > times[nomeId].voltaMaior) {
+    //     times[nomeId].voltaMaior = voltaAtual;
+    // }
 
     times[nomeId].tempoInicialVolta = Date.now();
     console.log(atualizaPosicoes(times));
