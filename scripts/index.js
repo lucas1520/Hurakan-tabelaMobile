@@ -75,7 +75,7 @@ Object.entries(times).forEach((time) => {
 
     container.innerHTML = `
         <div style="border: 1px solid black;" class="time" onclick="adicionarVolta('${time[0]}')">
-            <span class="time__top">
+            <span class="time__top" id=time_${time[0]}>
                 <h2>${time[1].nome}</h2>
                 <p class="time__tempo" id=tempo_${time[0]}>00:00:00</p>
             </span>
@@ -109,7 +109,8 @@ function adicionarVolta(nomeId) {
     let voltaAtual = Date.now() - times[nomeId].tempoInicialVolta;
     console.log(voltaAtual);
     times[nomeId].voltas.push(voltaAtual);
-    if (voltaAtual < times[nomeId].voltaMenor) {
+    console.log(`Volta menor: ${times[nomeId].voltaMenor}`)
+    if (voltaAtual < times[nomeId].voltaMenor || times[nomeId].voltaMenor == null) {
         times[nomeId].voltaMenor = voltaAtual;
     }
 

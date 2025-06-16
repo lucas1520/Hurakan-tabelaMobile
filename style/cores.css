@@ -1,0 +1,29 @@
+#time_hurakan {
+    background-color: orange;
+    /* background-image: linear-gradient(to bottom right, rgb(70, 70, 255), orange); */
+}
+
+#time_seteCap {
+    background-color: rgb(31, 31, 255);
+    /* background-image: linear-gradient(to bottom right, blue, red); */
+}
+
+#time_solares {
+    background-color: yellow;
+    /* background-image: linear-gradient(to bottom right, blue, yellow); */
+}
+
+#time_solaris {
+    background-color: red;
+    /* background-image: linear-gradient(to bottom right, red, green); */
+}
+
+#time_arari {
+    background-color: rgb(255, 190, 69);
+    /* background-image: linear-gradient(to bottom right, red, green); */
+}
+
+#time_zenite {
+    background-color: rgb(121, 121, 255);
+    /* background-image: linear-gradient(to bottom right, red, green); */
+}
