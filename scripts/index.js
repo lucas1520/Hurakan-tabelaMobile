@@ -82,6 +82,7 @@ Object.entries(times).forEach((time) => {
             <hr class="separacao">
             <span class="time__bottom">
                 <p id=volta_${time[0]} class="time__voltas">${nVoltas}</p>
+                <p id=gap_${time[0]} class="time__gap"></p>
                 <button onclick="event.stopPropagation(); mostraTempos('${time[0]}')"> Tempos </button>
                 ${/* <button onclick="event.stopPropagation(); alert('foi')">-</button> */''}
             </span>
@@ -247,6 +248,8 @@ function iniciarCronometro() {
             let tempoCadaTime = tempoAgora - elem[1].tempoInicialVolta;
             document.getElementById(`tempo_${elem[0]}`).textContent = converterTempo(tempoCadaTime, false);
         })
+
+        atualizaGaps(tempoAgora - tempoInicio);
     }, 170)
     localStorage.setItem("times", JSON.stringify(times))
     comecou = true;
@@ -276,6 +279,62 @@ function converterTempo(mili, geral) {
 
     if (geral) return `${horas}:${min}:${seg}`;
     else return `${min}:${seg}`;
+}
+
+// ms desde o inicio em que o time completou k voltas
+function tempoCruzamento(time, k) {
+    let soma = 0;
+    for (let i = 0; i < k; i++) soma += time.voltas[i];
+    return soma;
+}
+
+// Diferenca do Hurakan para o time. Positivo = Hurakan na frente.
+// Retorna { ms }, { voltas } (time dobrado) ou null (ninguem completou volta ainda)
+function calcularGap(time, agora) {
+    const hurakan = times.hurakan;
+    const nH = hurakan.nVoltas;
+    const nT = time.nVoltas;
+    const dif = nH - nT;
+
+    if (nH == 0 && nT == 0) return null;
+    if (Math.abs(dif) >= 2) {
+        return { voltas: dif > 0 ? dif - 1 : dif + 1 };
+    }
+    if (dif == 0) return { ms: tempoCruzamento(time, nH) - tempoCruzamento(hurakan, nH) };
+    if (dif == 1) return { ms: agora - tempoCruzamento(hurakan, nT + 1) };
+    return { ms: -(agora - tempoCruzamento(time, nH + 1)) };
+}
+
+function formatarGap(gap) {
+    if (gap == null) return "--";
+    if (gap.voltas != null) {
+        const n = Math.abs(gap.voltas);
+        return `${gap.voltas > 0 ? "+" : "-"}${n} ${n == 1 ? "volta" : "voltas"}`;
+    }
+
+    const sinal = gap.ms < 0 ? "-" : "+";
+    const seg = Math.abs(gap.ms) / 1000;
+    if (seg < 60) return `${sinal}${seg.toFixed(1)}s`;
+
+    const min = Math.floor(seg / 60);
+    return `${sinal}${min}:${(seg % 60).toFixed(1).padStart(4, "0")}`;
+}
+
+function atualizaGaps(agora) {
+    Object.entries(times).forEach((elem) => {
+        if (elem[0] == "hurakan") return;
+
+        const el = document.getElementById(`gap_${elem[0]}`);
+        if (el == null) return;
+
+        const gap = calcularGap(elem[1], agora);
+        el.textContent = formatarGap(gap);
+
+        const frente = gap != null && (gap.voltas != null ? gap.voltas > 0 : gap.ms > 0);
+        const atras = gap != null && (gap.voltas != null ? gap.voltas < 0 : gap.ms < 0);
+        el.classList.toggle("gap--frente", frente);
+        el.classList.toggle("gap--atras", atras);
+    })
 }
 
 function mostrarPosicoes() {

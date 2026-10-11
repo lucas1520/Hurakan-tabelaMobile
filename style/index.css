@@ -24,6 +24,26 @@
     font-size: large;
 
 }
+
+.time__gap {
+    font-size: large;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 0.5vh 1vh;
+    color: white;
+}
+
+.time__gap:empty {
+    display: none;
+}
+
+.gap--frente {
+    background-color: green;
+}
+
+.gap--atras {
+    background-color: red;
+}
 /* --------------------- */
 
 /* posicoes */
