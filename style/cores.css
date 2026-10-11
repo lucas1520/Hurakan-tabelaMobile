@@ -27,3 +27,27 @@
     background-color: rgb(121, 121, 255);
     /* background-image: linear-gradient(to bottom right, red, green); */
 }
+
+#time_gunes {
+    background-color: violet;
+}
+
+#time_reisDoSol {
+    background-color: lightpink;
+}
+
+#time_solmar {
+    background-color: turquoise;
+}
+
+#time_fernando {
+    background-color: silver;
+}
+
+#time_hefesto {
+    background-color: peru;
+}
+
+#time_leviata {
+    background-color: darkseagreen;
+}

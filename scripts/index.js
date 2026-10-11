@@ -3,63 +3,33 @@ let intervalo;
 let comecou = false;
 let times;
 
+function novoTime(nome) {
+    return {
+        nome: nome,
+        voltas: [],
+        nVoltas: 0,
+        voltaMenor: Infinity,
+        voltaMaior: -Infinity,
+        mediaVoltas: 0,
+        tempoInicialVolta: 0
+    };
+}
+
 let salvo = localStorage.getItem("times");
 if (salvo == null) {
     times = {
-        hurakan: {
-            nome: "Hurakan",
-            voltas: [],
-            nVoltas: 0,
-            voltaMenor: Infinity,
-            voltaMaior: -Infinity,
-            mediaVoltas: 0,
-            tempoInicialVolta: 0
-        },
-        seteCap: {
-            nome: "7 Capitães",
-            voltas: [],
-            nVoltas: 0,
-            voltaMenor: Infinity,
-            voltaMaior: -Infinity,
-            mediaVoltas: 0,
-            tempoInicialVolta: 0
-        },
-        solares: {
-            nome: "Solares",
-            voltas: [],
-            nVoltas: 0,
-            voltaMenor: Infinity,
-            voltaMaior: -Infinity,
-            mediaVoltas: 0,
-            tempoInicialVolta: 0
-        },
-        zenite: {
-            nome: "Zenite",
-            voltas: [],
-            nVoltas: 0,
-            voltaMenor: Infinity,
-            voltaMaior: -Infinity,
-            mediaVoltas: 0,
-            tempoInicialVolta: 0
-        },
-        solaris: {
-            nome: "Solaris",
-            voltas: [],
-            nVoltas: 0,
-            voltaMenor: Infinity,
-            voltaMaior: -Infinity,
-            mediaVoltas: 0,
-            tempoInicialVolta: 0
-        },
-        arari: {
-            nome: "Araribóia",
-            voltas: [],
-            nVoltas: 0,
-            voltaMenor: Infinity,
-            voltaMaior: -Infinity,
-            mediaVoltas: 0,
-            tempoInicialVolta: 0
-        }
+        hurakan: novoTime("Hurakan"),
+        arari: novoTime("Araribóia"),
+        gunes: novoTime("Gunes"),
+        reisDoSol: novoTime("Reis do Sol"),
+        solares: novoTime("Solares"),
+        solmar: novoTime("SolMar Celeris"),
+        fernando: novoTime("Fernando Amorim"),
+        hefesto: novoTime("Hefesto"),
+        leviata: novoTime("Leviatã"),
+        seteCap: novoTime("7 Capitães"),
+        solaris: novoTime("Solaris"),
+        zenite: novoTime("Zênite Solar")
     }
     console.log(`Salvo == null`)
 

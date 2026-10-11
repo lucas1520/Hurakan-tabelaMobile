@@ -11,17 +11,23 @@
 }
 
 #list {
-    display: inline-flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    gap: 2vh;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5vh 2vw;
+    width: 100%;
     padding: 1vh;
-    /* max-height: 90vh; */
+    box-sizing: border-box;
+}
+
+#list > div {
+    display: flex;
 }
 
 .time {
-    width: 70vw;
+    flex: 1;
     padding: 2vh;
+    box-sizing: border-box;
+    min-width: 0;
     /* margin-bottom: 2vh; */
 }
 
@@ -32,24 +38,29 @@
 
 .time__top {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .time__top > h2 {
     overflow: hidden;
     text-overflow: ellipsis;
+    max-width: 100%;
+    font-size: large;
     /* word-wrap: break-word; */
 }
 
 .time__bottom {
     display: flex;
+    flex-wrap: wrap;
+    gap: 1vh;
     justify-content: space-between;
     align-items: center;
 }
 
 .time__bottom > button {
-    width: 30%;
+    width: 100%;
     border-radius: 5px;
     padding: 1vh;
     /* padding-left: 10%;
